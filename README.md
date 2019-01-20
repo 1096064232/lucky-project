@@ -1,5 +1,6 @@
 # lucky-project
-spring boot开发通用模块，如：Security安全管理，支付等
+提供基于spring boot的通用模块，如：Security安全管理，支付等，使用项目开发更快速
+
 该项目能做什么？？
 
    整个项目封装了Security安全管理、微信和支付宝支付模块，只需要要在你的项目中引入相应的依赖，就可以实现相应的功能。
