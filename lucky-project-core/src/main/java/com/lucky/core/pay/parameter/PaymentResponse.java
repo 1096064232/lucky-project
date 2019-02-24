@@ -1,14 +1,13 @@
 package com.lucky.core.pay.parameter;
 
-import java.util.Map;
 
 /**
- *  支付请求发送完成获取的相应
+ *  支付请求发送完成获取响应
  */
 public interface PaymentResponse extends  PublicResponse {
 
     /**
-     *
+     *  返回数据
      * @return
      */
      Object getBody();

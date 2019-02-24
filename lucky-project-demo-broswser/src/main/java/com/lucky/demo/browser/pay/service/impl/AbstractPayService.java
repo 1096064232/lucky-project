@@ -1,14 +1,8 @@
 package com.lucky.demo.browser.pay.service.impl;
 
 import com.lucky.core.exception.PayException;
-import com.lucky.core.pay.parameter.PaymentRequest;
-import com.lucky.core.pay.parameter.PaymentResultQueryRequest;
-import com.lucky.core.pay.parameter.RefundRequest;
-import com.lucky.core.pay.parameter.RefundResultQureyRequest;
-import com.lucky.core.pay.parameter.impl.DefaultPaymentRequest;
-import com.lucky.core.pay.parameter.impl.DefaultPaymentResultQueryRequest;
-import com.lucky.core.pay.parameter.impl.DefaultRefundRequest;
-import com.lucky.core.pay.parameter.impl.DefaultRefundResultQureyRequest;
+import com.lucky.core.pay.parameter.*;
+import com.lucky.core.pay.parameter.impl.*;
 import com.lucky.demo.browser.pay.service.PayService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -117,4 +111,20 @@ public abstract class AbstractPayService implements PayService {
 
     }
 
+    /**
+     *  获取订单关闭响应参数
+     * @param request
+     * @return
+     */
+    protected TradeCloseRequest getTradeCloseRequest(ServletWebRequest request){
+        DefaultTradeCloseRequest tradeCloseRequest = new DefaultTradeCloseRequest();
+        String merchantNo = ServletRequestUtils.getStringParameter(request.getRequest(), "merchantNo", "");
+        String paymentNo = ServletRequestUtils.getStringParameter(request.getRequest(), "paymentNo", "");
+        if (StringUtils.isBlank(merchantNo) && StringUtils.isBlank(paymentNo)) {
+            throw new PayException("商户号和支付订单号不能同时为空");
+        }
+        tradeCloseRequest.setMerchantNo(merchantNo);
+        tradeCloseRequest.setPaymentNo(paymentNo);
+        return  tradeCloseRequest;
+    }
 }

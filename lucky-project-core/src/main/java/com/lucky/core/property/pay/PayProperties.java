@@ -1,6 +1,7 @@
-package com.lucky.core.property;
+package com.lucky.core.property.pay;
 
-import com.lucky.core.property.ali.AliPayProperties;
+import com.lucky.core.property.pay.weixin.WeixinPayProperties;
+import com.lucky.core.property.pay.ali.AliPayProperties;
 
 /**
  *  支付的配置项

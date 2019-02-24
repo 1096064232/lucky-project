@@ -55,5 +55,5 @@ public interface PaymentProcessor {
      * @param tradeCloseRequest
      * @return
      */
-    TreadClsoeResponse tradeClose(ServletWebRequest servletWebRequest,TradeCloseRequest tradeCloseRequest);
+    TradeClsoeResponse tradeClose(ServletWebRequest servletWebRequest,TradeCloseRequest tradeCloseRequest);
 }

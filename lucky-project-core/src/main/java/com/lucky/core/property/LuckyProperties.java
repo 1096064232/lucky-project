@@ -1,6 +1,8 @@
 package com.lucky.core.property;
 
 
+import com.lucky.core.property.pay.PayProperties;
+import com.lucky.core.property.security.SecurityProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**

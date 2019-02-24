@@ -1,10 +1,14 @@
 package com.lucky.common.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class MapUtils {
 
+    private static  Logger logger = LoggerFactory.getLogger(MapUtils.class);
 
     public static Map<String, Object> conversion(Map<String, String> map) {
         Map<String, Object> result = new HashMap<>();
@@ -23,10 +27,9 @@ public class MapUtils {
      */
     public static void printMap(Map map){
         if(map == null)
-            System.err.println("集合为空");
+            logger.info("集合为空");
        for(Object key:map.keySet()){
-           System.err.println("key is :"+key+" value is :"+map.get(key));
+           logger.info("key is :{},value is :{}, value is :",key,(String)map.get(key));
        }
     }
-
 }

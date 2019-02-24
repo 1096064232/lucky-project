@@ -1,4 +1,4 @@
-package com.lucky.core.property.ali;
+package com.lucky.core.property.pay.ali;
 
 public class AliPayProperties {
 
@@ -21,6 +21,7 @@ public class AliPayProperties {
      *  商户私钥
      */
     private String merchantPrivateKey;
+
     /**
      *  字符集设置
      */
@@ -30,15 +31,16 @@ public class AliPayProperties {
      *  返回格式
      */
     private String format = "JSON";
+
     /**
      *  签名类型
      */
     private String signType = "RSA2";
 
-//    /**
-//     * 销售产品码  电脑网站支付为:FAST_INSTANT_TRADE_PAY  手机网站支付为 QUICK_WAP_WAY
-//     */
-//    private String productCode ="QUICK_WAP_WAY";
+    /**
+     * 销售产品码  电脑网站支付为:FAST_INSTANT_TRADE_PAY  手机网站支付为 QUICK_WAP_WAY
+     */
+    private String productCode ="QUICK_WAP_WAY";
 
     public String getFormat() {
         return format;
@@ -48,13 +50,13 @@ public class AliPayProperties {
         this.format = format;
     }
 
-//    public String getProductCode() {
-//        return productCode;
-//    }
-//
-//    public void setProductCode(String productCode) {
-//        this.productCode = productCode;
-//    }
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
 
     public String getMerchantPrivateKey() {
         return merchantPrivateKey;

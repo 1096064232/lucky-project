@@ -1,4 +1,6 @@
 package com.lucky.core.pay.parameter;
 
-public interface TradeCloseRequest {
+public interface TradeCloseRequest extends PaymentResultQueryRequest {
+
+
 }

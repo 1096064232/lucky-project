@@ -42,4 +42,9 @@ public interface PayService {
      * @param servletWebRequest
      */
     void returnNote(ServletWebRequest servletWebRequest);
+
+    /**
+     *  订单关闭请求
+     */
+    void tradeClose(ServletWebRequest servletWebRequest);
 }

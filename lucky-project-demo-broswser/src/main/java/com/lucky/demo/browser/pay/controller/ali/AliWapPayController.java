@@ -1,4 +1,4 @@
-package com.lucky.demo.browser.pay.controller;
+package com.lucky.demo.browser.pay.controller.ali;
 
 import com.lucky.demo.browser.pay.service.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +62,16 @@ public class AliWapPayController {
     }
 
     /**
+     *  订单关闭
+     * @param request
+     * @param response
+     */
+    @PostMapping("/trade/close")
+    public void tradeClsoe(HttpServletRequest request, HttpServletResponse response) {
+        aliWapPayServiceImpl.tradeClose(new ServletWebRequest(request, response));
+    }
+
+    /**
      * 异步通知
      *
      * @param request
@@ -82,4 +92,6 @@ public class AliWapPayController {
     public void returnNote(HttpServletRequest request, HttpServletResponse response) {
         aliWapPayServiceImpl.returnNote(new ServletWebRequest(request, response));
     }
+
+
 }

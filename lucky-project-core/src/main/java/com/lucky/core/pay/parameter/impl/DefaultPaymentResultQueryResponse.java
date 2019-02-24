@@ -27,6 +27,7 @@ public class DefaultPaymentResultQueryResponse  extends  DefaultPublicResponse i
      */
     private String orderAmount;
 
+
     @Override
     public String getMerchantNo() {
         return merchantNo;

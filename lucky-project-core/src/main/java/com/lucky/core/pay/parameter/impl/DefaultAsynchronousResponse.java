@@ -14,9 +14,18 @@ public class DefaultAsynchronousResponse extends DefaultPaymentResultQueryRespon
    private String attachInfo;
 
     /**
-     *  异步通知签名校验结果
+     *  异步签名结果
      */
-    private boolean signValidate;
+   private boolean isSignValidate = false;
+
+    @Override
+    public boolean isSignValidate() {
+        return isSignValidate;
+    }
+
+    public void setSignValidate(boolean signValidate) {
+        isSignValidate = signValidate;
+    }
 
     @Override
     public String getAttachInfo() {
@@ -27,13 +36,6 @@ public class DefaultAsynchronousResponse extends DefaultPaymentResultQueryRespon
         this.attachInfo = attachInfo;
     }
 
-    @Override
-    public boolean isSignValidate() {
-        return signValidate;
-    }
 
-    public void setSignValidate(boolean signValidate) {
-        this.signValidate = signValidate;
-    }
 }
 

@@ -339,18 +339,18 @@
         </div>
     </form>
     <!--交易关闭-->
-    <form name=tradeclose action=alipay.trade.close.jsp method=post
+    <form name=tradeclose action="/pay/ali/pc/trade/close" method=post
           target="_blank">
         <div id="body5" class="tab-content" name="divcontent">
             <dl class="content">
                 <dt>商户订单号 ：</dt>
                 <dd>
-                    <input id="WIDTCout_trade_no" name="WIDTCout_trade_no" />
+                    <input id="WIDTCout_trade_no" name="merchantNo" />
                 </dd>
                 <hr class="one_line">
                 <dt>支付宝交易号 ：</dt>
                 <dd>
-                    <input id="WIDTCtrade_no" name="WIDTCtrade_no" />
+                    <input id="WIDTCtrade_no" name="paymentNo" />
                 </dd>
                 <hr class="one_line">
                 <dt></dt>

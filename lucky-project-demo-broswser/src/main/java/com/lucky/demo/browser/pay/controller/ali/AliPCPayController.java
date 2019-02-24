@@ -1,4 +1,4 @@
-package com.lucky.demo.browser.pay.controller;
+package com.lucky.demo.browser.pay.controller.ali;
 
 import com.lucky.demo.browser.pay.service.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +61,16 @@ public class AliPCPayController {
     @PostMapping("/refund/query")
     public void refundQuery(HttpServletRequest request, HttpServletResponse response) {
         aliPCPayServiceImpl.refundQuery(new ServletWebRequest(request, response));
+    }
+
+    /**
+     *  订单关闭
+     * @param request
+     * @param response
+     */
+    @PostMapping("/trade/close")
+    public void tradeClsoe(HttpServletRequest request, HttpServletResponse response) {
+        aliPCPayServiceImpl.tradeClose(new ServletWebRequest(request, response));
     }
 
     /**
