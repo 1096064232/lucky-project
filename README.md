@@ -49,13 +49,38 @@
        
 二、怎么使用以及怎么去个性化自己的需求
 
-     整个模块的结构如下:
-      ![Image text](https://github.com/1096064232/lucky-project/blob/master/image-storage/model-description.png)
-          
-    1、支付宝支付
+     整个模块的结构及说明如下:
+       lucky-project-parent   ---------------父项目
+         --commom     -----------------------通用模块，主要是放工具类和常用的通用配置                  
+           --lucky-project-core     -----------核心代码  依赖commom模块
+             --lucky-project-app     ------------跟APP有关的代码  依赖lucky-project-core模块
+               --lucky-project-demo-app     -------app的测试demo  依赖lucky-project-app模块
+             --lucky-project-browser     --------跟浏览器有关的代码  依赖lucky-project-core模块
+               --lucky-project-demo-browser     ---浏览器的测试demo  依赖lucky-project-browser 模块
+         pom.xml     -----------------------父项目的pom文件
+       
+       
+    1、怎么使用
+       
+        若项目是浏览器项目,加入 lucky-project-browser依赖即可，若项目是app项目,加入 lucky-project-app依赖即可
         
-        假设你的项目需要支付宝的手机网站
-      
+        使用方式参考lucky-project-browser模块的com.lucky.demo.browser.pay。
+       
+       支付宝支付的配置项：
+       lucky:
+         pay:
+           ali:
+             appid: 支付宝的appid
+             wayUrl: 支付宝的支付网关
+             alipay-public-key: 支付宝公钥
+             merchant-private-key: 商户私钥
+             
+           
+
+        
+        
+             
+             
                          
        
         
