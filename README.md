@@ -49,8 +49,9 @@
        
 二、怎么使用以及怎么去个性化自己的需求
 
-     整个模块的划分如下:
-     
+     整个模块的结构如下:
+     ![https://github.com/1096064232/lucky-project/blob/master/image-storage/项目结构说明.png]
+      
           
     1、支付宝支付
         
