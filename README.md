@@ -64,7 +64,7 @@
        
         若项目是浏览器项目,加入 lucky-project-browser依赖即可，若项目是app项目,加入 lucky-project-app依赖即可
         
-        使用方式参考lucky-project-browser模块的com.lucky.demo.browser.pay。
+        使用方式参考lucky-project-demo-browser模块的com.lucky.demo.browser.pay。
        
        支付宝支付的配置项：
        lucky:
