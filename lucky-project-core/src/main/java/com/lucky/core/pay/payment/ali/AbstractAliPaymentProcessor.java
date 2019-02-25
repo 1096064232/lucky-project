@@ -12,6 +12,7 @@ import com.alipay.api.response.AlipayTradeCloseResponse;
 import com.alipay.api.response.AlipayTradeFastpayRefundQueryResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
+import com.github.wxpay.sdk.WXPayUtil;
 import com.lucky.common.util.JsonUtil;
 import com.lucky.common.util.MapUtils;
 import com.lucky.core.exception.PayException;
@@ -23,6 +24,9 @@ import com.lucky.core.property.pay.ali.AliPayProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.ServletWebRequest;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -63,6 +67,33 @@ public abstract class AbstractAliPaymentProcessor implements PaymentProcessor {
     }
 
     /**
+     *  获取支付宝支付异步通知的参数集合
+     * @param request
+     * @return
+     */
+    protected Map<String, String> getResult(HttpServletRequest request) {
+
+            //获取所有返回的参数
+            Map requestParams = request.getParameterMap();
+            //获取支付宝POST过来反馈信息
+            Map<String, String> params = new HashMap<String, String>();
+            for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
+                String name = (String) iter.next();
+                String[] values = (String[]) requestParams.get(name);
+                String valueStr = "";
+                for (int i = 0; i < values.length; i++) {
+                    valueStr = (i == values.length - 1) ? valueStr + values[i]
+                            : valueStr + values[i] + ",";
+                }
+                //乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
+                //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "gbk");
+                params.put(name, valueStr);
+            }
+            return params;
+    }
+
+
+    /**
      * 支付宝支付请求异步通知处理逻辑
      *
      * @param servletWebRequest
@@ -70,24 +101,9 @@ public abstract class AbstractAliPaymentProcessor implements PaymentProcessor {
      */
     @Override
     public AsynchronousResponse callBacksHandler(ServletWebRequest servletWebRequest) {
-        //获取所有返回的参数
-        Map requestParams = servletWebRequest.getParameterMap();
-        //获取支付宝POST过来反馈信息
-        Map<String, String> params = new HashMap<String, String>();
-        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
-            String name = (String) iter.next();
-            String[] values = (String[]) requestParams.get(name);
-            String valueStr = "";
-            for (int i = 0; i < values.length; i++) {
-                valueStr = (i == values.length - 1) ? valueStr + values[i]
-                        : valueStr + values[i] + ",";
-            }
-            //乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
-            //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "gbk");
-            params.put(name, valueStr);
-        }
-        AsynchronousResponse response = new DefaultAsynchronousResponse();
 
+        AsynchronousResponse response = new DefaultAsynchronousResponse();
+        Map<String, String> params = getResult(servletWebRequest.getRequest());
         ((DefaultAsynchronousResponse) response).setParameters(params);
         ((DefaultAsynchronousResponse) response).setSign((String) params.get("sign"));
         ((DefaultAsynchronousResponse) response).setMerchantNo((String) params.get("out_trade_no"));
@@ -450,7 +466,6 @@ public abstract class AbstractAliPaymentProcessor implements PaymentProcessor {
      */
     protected boolean signVerified(Map<String, String> params) {
         try {
-            MapUtils.printMap(params);
             AliPayProperties aliPay = luckyProperties.getPay().getAli();
             return AlipaySignature.rsaCheckV1(params, aliPay.getAlipayPublicKey(), aliPay.getCharset(), aliPay.getSignType()); //调用SDK验证签名
         } catch (AlipayApiException e) {

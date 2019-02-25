@@ -1,5 +1,8 @@
 package com.lucky.core.property.pay.ali;
 
+/**
+ * 支付宝支付配置项
+ */
 public class AliPayProperties {
 
     /**
@@ -37,25 +40,12 @@ public class AliPayProperties {
      */
     private String signType = "RSA2";
 
-    /**
-     * 销售产品码  电脑网站支付为:FAST_INSTANT_TRADE_PAY  手机网站支付为 QUICK_WAP_WAY
-     */
-    private String productCode ="QUICK_WAP_WAY";
-
     public String getFormat() {
         return format;
     }
 
     public void setFormat(String format) {
         this.format = format;
-    }
-
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
     }
 
     public String getMerchantPrivateKey() {
