@@ -71,7 +71,7 @@
          pay:
            ali:
              appid: 支付宝的appid
-             wayUrl: 支付宝的支付网关
+             way-url: 支付宝的支付网关
              alipay-public-key: 支付宝公钥
              merchant-private-key: 商户私钥
              
