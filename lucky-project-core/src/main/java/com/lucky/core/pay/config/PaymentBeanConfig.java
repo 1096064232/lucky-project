@@ -14,6 +14,7 @@ import com.lucky.core.property.pay.ali.AliPayProperties;
 import com.lucky.core.property.constant.PayConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -61,7 +62,8 @@ public class PaymentBeanConfig {
      * @return
      */
     @Bean
-    @ConditionalOnMissingBean(WXPayConfig.class)
+//    @ConditionalOnMissingBean(WXPayConfig.class)
+    @ConditionalOnProperty(prefix = "lucky.pay.weixin",name = "appid")
     public WXPayConfig wxPayConfig() {
         try {
             return new WeixinPaymentConfig(luckyProperties);
@@ -76,7 +78,8 @@ public class PaymentBeanConfig {
      * @return
      */
     @Bean
-    @ConditionalOnMissingBean(WXPay.class)
+//    @ConditionalOnMissingBean(WXPay.class)
+    @ConditionalOnProperty(prefix = "lucky.pay.weixin",name = "appid")
     public WXPay wxPay() {
         return new WXPay(wxPayConfig());
     }

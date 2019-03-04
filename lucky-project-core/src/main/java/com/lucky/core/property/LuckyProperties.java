@@ -11,8 +11,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "lucky")
 public class LuckyProperties {
 
+    /**
+     *  支付配置
+     */
     private PayProperties pay = new PayProperties();
 
+    /**
+     *  security配置
+     */
     private SecurityProperties security = new SecurityProperties();
 
     public PayProperties getPay() {

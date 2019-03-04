@@ -2,8 +2,6 @@ package com.lucky.core.pay.parameter.impl;
 
 import com.lucky.core.pay.parameter.RefundResponse;
 
-
-
 public class DefaultRefundResponse  extends  DefaultPublicResponse implements RefundResponse {
 
     /**

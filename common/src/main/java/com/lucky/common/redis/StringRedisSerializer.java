@@ -1,12 +1,17 @@
 package com.lucky.common.redis;
 
 import com.alibaba.fastjson.JSON;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.util.Assert;
-
+//import org.springframework.data.redis.serializer.RedisSerializer;
 import java.nio.charset.Charset;
 
-public class StringRedisSerializer implements RedisSerializer<Object> {
+/**
+ *  重写redis的key序列化方式，解决key乱码问题
+ */
+public class StringRedisSerializer
+//        implements RedisSerializer<Object>
+{
+
     private final Charset charset;
 
     private final String target = "\"";
@@ -22,12 +27,12 @@ public class StringRedisSerializer implements RedisSerializer<Object> {
         this.charset = charset;
     }
 
-    @Override
+//    @Override
     public String deserialize(byte[] bytes) {
         return (bytes == null ? null : new String(bytes, charset));
     }
 
-    @Override
+//    @Override
     public byte[] serialize(Object object) {
         String string = JSON.toJSONString(object);
         if (string == null) {

@@ -5,14 +5,13 @@ import com.github.wxpay.sdk.WXPayUtil;
 import com.lucky.core.exception.PayException;
 import com.lucky.core.pay.PaymentProcessor;
 import com.lucky.core.pay.parameter.*;
-import com.lucky.core.pay.payment.weixin.parameter.WeixinAsynchronousResponse;
-import com.lucky.core.pay.payment.weixin.parameter.WeixinPaymentResponse;
-import com.lucky.core.pay.payment.weixin.parameter.WeixinPaymentResultQueryResponse;
+import com.lucky.core.pay.payment.weixin.parameter.*;
 import com.lucky.core.property.LuckyProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.ServletWebRequest;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -77,49 +76,10 @@ public abstract class AbstractWeixinPaymentProcessor implements PaymentProcessor
         ((WeixinAsynchronousResponse) asynchronousResponse).setOrderAmount((String) result.get("total_fee"));
         ((WeixinAsynchronousResponse) asynchronousResponse).setSignValidate(signVerified(result));
         ((WeixinAsynchronousResponse) asynchronousResponse).setAttachInfo((String) result.get("attach"));
-        WeixinAsynchronousResponse.WeixinInnerAsynchronousResponse innerResponse =   ((WeixinAsynchronousResponse) asynchronousResponse).getInnerResponse();
+        WeixinAsynchronousResponse.WeixinInnerAsynchronousResponse innerResponse = ((WeixinAsynchronousResponse) asynchronousResponse).getInnerResponse();
         innerResponse.setErrCode(result.get("err_code"));
         innerResponse.setErrCodeDes(result.get("err_code_des"));
         return asynchronousResponse;
-    }
-
-    /**
-     * 校验异步通知签名
-     *
-     * @param params
-     * @return
-     */
-    protected boolean signVerified(Map<String, String> params) {
-        try {
-            return   WXPayUtil.isSignatureValid(params,luckyProperties.getPay().getWeixin().getKey(),luckyProperties.getPay().getWeixin().getSignType());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     *  获取微信支付异步通知的参数集合
-     * @param request
-     * @return
-     */
-    protected Map<String, String> getResult(HttpServletRequest request) {
-
-        try {
-            InputStream inStream = request.getInputStream();
-            ByteArrayOutputStream outSteam = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int len = 0;
-            while ((len = inStream.read(buffer)) != -1) {
-                outSteam.write(buffer, 0, len);
-            }
-            outSteam.close();
-            inStream.close();
-            return   WXPayUtil.xmlToMap(new String(outSteam.toByteArray(), "utf-8"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new HashMap();
-        }
     }
 
     /**
@@ -137,6 +97,158 @@ public abstract class AbstractWeixinPaymentProcessor implements PaymentProcessor
             return paymentResultQueryResponseAdpter(wxPay.orderQuery(data));
         } catch (Exception e) {
             throw new PayException(e);
+        }
+    }
+
+    /**
+     * 微信发起退款
+     *
+     * @param servletWebRequest
+     * @param refundRequest
+     * @return
+     */
+    @Override
+    public RefundResponse launchRefundProcessor(ServletWebRequest servletWebRequest, RefundRequest refundRequest) {
+        Map<String, String> requestData = getWeixinPaymentTradeRefundRequest(refundRequest);
+        try {
+            return refundResponseAdpter(wxPay.refund(requestData));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 微信退款查询
+     *
+     * @param servletWebRequest
+     * @param refundResultQureyRequest
+     * @return
+     */
+    @Override
+    public RefundResultQureyResponse refundResultQuery(ServletWebRequest servletWebRequest, RefundResultQureyRequest refundResultQureyRequest) {
+
+        Map<String, String> data = getWeixinRefundResultQueryRequest(refundResultQureyRequest);
+        try {
+            return rfundResultQureyResponseAdpter(wxPay.refundQuery(data));
+        } catch (Exception e) {
+            throw new PayException(e);
+        }
+    }
+
+    /**
+     * 组装退款查询参数
+     *
+     * @param refundResultQureyRequest
+     * @return
+     */
+    private Map<String, String> getWeixinRefundResultQueryRequest(RefundResultQureyRequest refundResultQureyRequest) {
+
+
+return null;
+
+    }
+
+    /**
+     *  组装退款查讯请求返回响应
+     * @param result
+     * @return
+     */
+    private RefundResultQureyResponse rfundResultQureyResponseAdpter(Map<String, String> result) {
+
+        return null;
+    }
+
+
+    /**
+     * 组装微信支付退款请求返回的参数
+     *
+     * @param result
+     * @return
+     */
+    protected RefundResponse refundResponseAdpter(Map<String, String> result) {
+
+        WeixinRefundResponse weixinRefundResponse = new WeixinRefundResponse();
+
+        //网关码
+        weixinRefundResponse.setGatewayCode(result.get("return_code"));
+        //网关信息
+        weixinRefundResponse.setGatewayMessage(result.get("return_msg"));
+        //业务码
+        weixinRefundResponse.setGatewayMessage(result.get("result_code"));
+        //请求返回的Map集合
+        weixinRefundResponse.setParameters(result);
+
+
+        weixinRefundResponse.setMerchantNo(result.get("out_trade_no"));
+        weixinRefundResponse.setPaymentNo(result.get("transaction_id"));
+        weixinRefundResponse.setRefundNo(result.get("refund_id"));
+        weixinRefundResponse.setMerchantRefundNo(result.get("out_refund_no"));
+        weixinRefundResponse.setRefundAmount(result.get("refund_fee"));
+
+        WeixinRefundResponse.WeixinInnerRefundResponse innerResponse = weixinRefundResponse.getInnerResponse();
+        innerResponse.setErrCode(result.get("err_code"));
+        innerResponse.setErrCode(result.get("err_code_des"));
+        return weixinRefundResponse;
+    }
+
+    /**
+     * 组装微信支付退款请求需要的参数
+     *
+     * @param refundRequest
+     * @return
+     */
+    protected Map<String, String> getWeixinPaymentTradeRefundRequest(RefundRequest refundRequest) {
+
+        Map<String, String> map = new HashMap<>();
+        if (WeixinRefundRequest.class.isAssignableFrom(refundRequest.getClass())) {
+            WeixinRefundRequest weixinRefundRequest = (WeixinRefundRequest) refundRequest;
+            map.put("out_refund_no", weixinRefundRequest.getRefundNo());
+            map.put("out_trade_no", weixinRefundRequest.getMerchantNo());
+            map.put("transaction_id", weixinRefundRequest.getPaymentNo());
+            map.put("refund_fee", weixinRefundRequest.getRefundAmount());
+            map.put("total_fee", weixinRefundRequest.getOrderAmount());
+        }
+        return map;
+    }
+
+    /**
+     * 校验异步通知签名
+     *
+     * @param params
+     * @return
+     */
+    protected boolean signVerified(Map<String, String> params) {
+        try {
+            return WXPayUtil.isSignatureValid(params, luckyProperties.getPay().getWeixin().getKey(), luckyProperties.getPay().getWeixin().getSignType());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 获取微信支付异步通知的参数集合
+     *
+     * @param request
+     * @return
+     */
+    protected Map<String, String> getResult(HttpServletRequest request) {
+
+        try {
+            InputStream inStream = request.getInputStream();
+            ByteArrayOutputStream outSteam = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int len = 0;
+            while ((len = inStream.read(buffer)) != -1) {
+                outSteam.write(buffer, 0, len);
+            }
+            outSteam.close();
+            inStream.close();
+            return WXPayUtil.xmlToMap(new String(outSteam.toByteArray(), "utf-8"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new HashMap();
         }
     }
 

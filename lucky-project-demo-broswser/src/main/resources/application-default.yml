@@ -1,0 +1,20 @@
+#server:
+#  port: 9005
+#lucky:
+#  pay:
+#    ali:
+#      appid: 2016091900549809
+#      way-url: https://openapi.alipaydev.com/gateway.do
+#      alipay-public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuMgtlTzRMG0XnBcXvKXytjnRn/wuBKV2tAJ22P0UVPAMCdBIPDpKPJDzltxqQ4GdOyPDSJGHFWxFyJtmmPZbIw4+W0COZNHQMToXjHUFEeo3EBZfOdmzffIfw+FoqoxvZNWncvgNBmJy9KBADgJ21mq/bbFkhVxBxKXCwyozdrvdl0fQsR5mH1xAmmXsQEotLlw2tgee+bWXbq41Lg/28L2moFFDal6SuFF34sU8fxLbvBmnlc8RCLvF9aLbljqg7MK4TPf96PVJYKnSBvUaLzF2LMn1qnfGUH8/BJJxe0tiU9dkwoUlguyay5AKCV+zIPnZc6wPTY2qOQhahlNJhwIDAQAB
+#      merchant-private-key: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCAJFCidDeC+m+eR45AmfGj0mK8ffyozurtc9UDp/NkDrjhHJaUNVt4zC6FHywCl/aCJtLAFWIdxlHq278bxB3BPz82Sjamv5OqLU8yYn8zhiPEutYMDYdFBhqcAPSO0IwRzYrleVyRUX/ITuAvCnPCf54cY9852MFq9FhJMNvgqsfp3knpXsVaefZVQz0ver9lJjs/MF9+M7c/oRxkEug+N9dMPiZ+pP/Zvcl7WFdA485Y8abNpORcVZV1CLuGgGPEf3Zw9rLYI8OF8nK7mILRV8AgkJ0/cz33PbNM5tM9SthdNM3BKQAAfhESYNYk1vFw9+0SZ3lBGOg3z0R7jz0bAgMBAAECggEAfGbFAXHiEn4eroK5T24kcO5mfKezCg8Xc77oJcx/Nbw1MBYY+XlzfCp9Xy+MAliVMHWQVHpt7ooCLQd42PPkDx/ftk0GEYwbRzMFl9yXsOWhA/R+qOTZVeE/JASpZ5x+3ym0lmLjwxBkBYrNid2T1FcgoF8072vHGpZsv2F3lPvJomPZSXGCb60OKgHZZhgzTrT8J1bLS5IsfhTuvhy7dSQ7kLkyK1qsLH/v53zXGAxs/6E+SGY2GXlIOArfGsmth/m6pOyHhDt3ywe8fKNkdLdw6P2Dtzz2oftPT6X0PwIjLZq1P5Y3Zi4SG3f2A7e+qoP8ugQ4cgecA7kQqF/9AQKBgQDwMW55RdbS+dNLyPlQt9YY1+SRsV96IXTkhYHNUTCfzAfdOknewbvlgvvuwPTSluD4nSHdunKgq3z2JqF6R9HgeGMA/wzK0ebNGgRiue6BNlTgoiongB9j8wbMfYMhgsoElqb7ncjBr0D1K9cDtN4J28rlfQB9WyaJSB0ZMthx6wKBgQCIkyPE/0p7bxsilcCXXAz4SMoA/pAGN8UyQ2czL4zpQVuXGdJG4fkSEdLlnD2a61c/IvweReBI6B4MId+UyPaExXeTWqTwfK6bK+hd82/eSyqi2QTX+Cu4ak99J08T2mi9seWnSQX1AUqH20vJoozmiyeHQO8qjBtSwWM5R89lkQKBgEFgUv9zQOuf0CE6jJGp1/5fFPmK27/0R0rEA/aMeL2l3SYb7WtSNABeTJBJuNlw8773lfYx/204AAVHsoAD+F4uplPpF+REiZudzz/H9+D3ltaljO+/ccvUpC8Yoo6GeNIS51RpN/Fv8DBLRHTfz+fDCVC5W17DZpPLKxBmxH8NAoGBAIHcPpezErQ5WfjRoZWKDj8KnyDA7FstLlDzrC4MWZT080zCXaHOfhDDZ9+xZxZmDchX0JhMYs2P//oTP09uopBuXpt7Bfgw5alf34ttzIH2wOylI6jjLVclpr1e4h8DfrJYdABTO9nRx3dUekSYThdsW0KM6JxxKg3PGjS95iMxAoGANQqbMft88L9CRTK5g4Kytuyj07pmgwIGp5wy/QMxcI94nDRn65skF73k0sz1/DXTqJTkBRkxk0aNvzPjqsCc00O4QdzYGArRQ+vY2zT9vTmfiu13URASuYmRQG7vQUPhdNAdkZ8nMl7zIolzlwTrAZAtLpN/KgGCmkVEhngoXVs=
+#  security:
+#    code:
+#      sms:
+#        length: 12
+#        expire-in: 10000
+#        validate-url: /user/sms/code,/user/code/sms
+#logging:
+#  level:
+#    com.lucky: debug
+#  file: lucky-project.log
+#  path: G:\LOG\lucky-project
