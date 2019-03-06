@@ -17,4 +17,8 @@ public interface ValidateCodeConstant {
      */
     String IMAGE_CODE = "image";
 
+    /**
+     *  获取验证码的URL前缀
+     */
+    String CODE_URL = "/code";
 }

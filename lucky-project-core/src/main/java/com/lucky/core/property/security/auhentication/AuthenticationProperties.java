@@ -1,5 +1,7 @@
 package com.lucky.core.property.security.auhentication;
 
+import com.lucky.core.property.constant.SecurityConstants;
+
 /**
  * 认证配置项
  */
@@ -8,7 +10,8 @@ public class AuthenticationProperties {
     /**
      *  当需要认证时跳转的URL
      */
-    private String unAuthenticationUrl="/unautentication";
+    private String unAuthenticationUrl= SecurityConstants.DEFAULT_UNAUTHENTICATION_URL;
+
     /**
      *  用户名加密码登录配置项
      */
@@ -18,6 +21,19 @@ public class AuthenticationProperties {
      *  手机号+短信登录的配置项
      */
     private MobileLoginAuthenticationProperties mobileLogin = new MobileLoginAuthenticationProperties();
+
+    /**
+     *  浏览器配置项
+     */
+    private BrowserAuthenticationProperties browser = new BrowserAuthenticationProperties();
+
+    public BrowserAuthenticationProperties getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(BrowserAuthenticationProperties browser) {
+        this.browser = browser;
+    }
 
     public String getUnAuthenticationUrl() {
         return unAuthenticationUrl;

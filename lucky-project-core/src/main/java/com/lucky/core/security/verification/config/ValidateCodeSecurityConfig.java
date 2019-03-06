@@ -4,8 +4,7 @@
 package com.lucky.core.security.verification.config;
 
 import javax.servlet.Filter;
-
-import com.lucky.core.security.authentication.LcukySecurityConfigurer;
+import com.lucky.core.security.authentication.SecurityConfigurerProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ValidateCodeSecurityConfig
 		extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>
-		implements LcukySecurityConfigurer<DefaultSecurityFilterChain, HttpSecurity> {
+		implements SecurityConfigurerProvider<DefaultSecurityFilterChain, HttpSecurity> {
 
 	@Autowired
 	private Filter validateCodeFilter;

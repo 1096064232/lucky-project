@@ -11,10 +11,9 @@ public class FormLoginAuthenticationProperties  {
     private String loginProcessingUrl = "/authentication/form";
 
     /**
-     *  请求方式
+     *  请求方式 （即使配置了也不起作用）
      */
     private String httpMethod = "POST";
-
 
     public String getLoginProcessingUrl() {
         return loginProcessingUrl;

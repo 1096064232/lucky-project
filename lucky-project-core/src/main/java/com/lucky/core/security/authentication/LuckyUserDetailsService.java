@@ -3,6 +3,8 @@
  */
 package com.lucky.core.security.authentication;
 
+import com.lucky.core.exception.PhoneNumberNotFoundException;
+import com.lucky.core.exception.UserIdNotFoundException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.social.security.SocialUserDetailsService;
@@ -12,6 +14,17 @@ import org.springframework.social.security.SocialUserDetailsService;
  */
 public interface LuckyUserDetailsService extends SocialUserDetailsService,UserDetailsService {
 
+
+	/**
+	 *  用户名+密码登录认证
+	 * @param username
+	 * @return
+	 * @throws UsernameNotFoundException
+	 */
+	@Override
+	LuckyUserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+
+
 	/**
 	 * 支持手机号认证
 	 * 
@@ -19,16 +32,7 @@ public interface LuckyUserDetailsService extends SocialUserDetailsService,UserDe
 	 * @return
 	 * @throws UsernameNotFoundException
 	 */
-	LuckyUserDetails loadUserByMobile(String phoneNumber) throws UsernameNotFoundException;
-
-	/**
-	 *  常规表单登录认证
-	 * @param username
-	 * @return
-	 * @throws UsernameNotFoundException
-	 */
-	@Override
-	LuckyUserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+	LuckyUserDetails loadUserByMobile(String phoneNumber) throws PhoneNumberNotFoundException;
 
 	/**
 	 *  社交登录认证
@@ -37,5 +41,5 @@ public interface LuckyUserDetailsService extends SocialUserDetailsService,UserDe
 	 * @throws UsernameNotFoundException
 	 */
 	@Override
-	LuckyUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException;
+	LuckyUserDetails loadUserByUserId(String userId) throws UserIdNotFoundException;
 }

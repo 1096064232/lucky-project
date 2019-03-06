@@ -2,6 +2,7 @@ package com.lucky.core.security.verification.controller;
 
 import com.lucky.common.pojo.SimpleResponse;
 import com.lucky.common.util.CommonUtils;
+import com.lucky.core.property.constant.ValidateCodeConstant;
 import com.lucky.core.security.verification.ValidateCode;
 import com.lucky.core.security.verification.ValidateCodeProcessor;
 import com.lucky.core.security.verification.ValidateCodeProcessorHolder;
@@ -28,16 +29,16 @@ public class ValidateController {
     @Autowired
     ValidateCodeProcessorHolder validateCodeProcessorHolder;
 
-    @GetMapping("/code/{type}")
+    @GetMapping(ValidateCodeConstant.CODE_URL+"/{type}")
     public void getValidateCode(@PathVariable(value = "type")String type, HttpServletRequest request, HttpServletResponse response){
         //获取验证码处理器
         ValidateCodeProcessor validateCodeProcessor = validateCodeProcessorHolder.findValidateCodeProcessor(type);
         ServletWebRequest servletWebRequest = new ServletWebRequest(request,response);
         //获取验证码
         SimpleResponse simpleResponse = validateCodeProcessor.create(servletWebRequest);
-        logger.info("获取验证码的结果是:{}",CommonUtils.toString(simpleResponse.getResponse()));
+        logger.debug("获取验证码的结果是:{}",CommonUtils.toString(simpleResponse.getResponse()));
         //发送验证码
         SimpleResponse sendResponse = validateCodeProcessor.send(servletWebRequest, (ValidateCode) simpleResponse.getResponse());
-        logger.info("发送验证码的结果是:{}",CommonUtils.toString(sendResponse));
+        logger.debug("发送验证码的结果是:{}",CommonUtils.toString(sendResponse));
     }
 }

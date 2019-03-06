@@ -5,9 +5,8 @@ package com.lucky.core.security.mobile;
 
 import com.lucky.core.property.LuckyProperties;
 import com.lucky.core.property.security.auhentication.MobileLoginAuthenticationProperties;
-import com.lucky.core.security.authentication.LcukySecurityConfigurer;
 import com.lucky.core.security.authentication.LuckyUserDetailsService;
-
+import com.lucky.core.security.authentication.SecurityConfigurerProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
@@ -25,7 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SmsCodeAuthenticationSecurityConfig
 		extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>
-		implements LcukySecurityConfigurer<DefaultSecurityFilterChain, HttpSecurity> {
+		implements SecurityConfigurerProvider<DefaultSecurityFilterChain, HttpSecurity> {
 
 	@Autowired
 	private AuthenticationSuccessHandler aAuthenticationSuccessHandler;

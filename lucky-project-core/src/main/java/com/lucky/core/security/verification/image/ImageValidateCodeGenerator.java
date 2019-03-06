@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import com.lucky.core.exception.ValidateCodeException;
 import com.lucky.core.property.LuckyProperties;
 import com.lucky.core.property.security.verification.ImageCodeProperties;
 import com.lucky.core.property.security.verification.ValidateCodeParameterProperties;
@@ -125,7 +126,7 @@ public class ImageValidateCodeGenerator implements ValidateCodeGenerator {
 			return createRandomChar(g, baseNumLetter,length);
 		}
 
-		return "";
+		throw new ValidateCodeException("未知的验证码类型");
 	}
 
 	/**

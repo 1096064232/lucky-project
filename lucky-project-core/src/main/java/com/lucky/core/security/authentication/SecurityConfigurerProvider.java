@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.SecurityConfigurer;
  *
  * @version 1.0
  */
-public interface LcukySecurityConfigurer<O, B extends SecurityBuilder<O>> extends  SecurityConfigurer<O, B>{
+public interface SecurityConfigurerProvider<O, B extends SecurityBuilder<O>> extends  SecurityConfigurer<O, B>{
+
 
 }

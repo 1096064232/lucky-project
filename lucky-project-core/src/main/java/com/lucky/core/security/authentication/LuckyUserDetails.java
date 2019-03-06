@@ -7,7 +7,7 @@ import org.springframework.social.security.SocialUserDetails;
 
 /**
  * 
- *  扩写SocialUserDetails加入ID,以便在{@see EntityListener}
+ *  扩写SocialUserDetails加入手机号
  * @author lucky ouyang
  *
  * @version 1.0
@@ -15,8 +15,8 @@ import org.springframework.social.security.SocialUserDetails;
 public interface LuckyUserDetails extends SocialUserDetails {
 
 	/**
-	 *  获取用户主键
+	 *  获取手机号
 	 * @return
 	 */
-	Long getId();
+	String getMobileNumber();
 }

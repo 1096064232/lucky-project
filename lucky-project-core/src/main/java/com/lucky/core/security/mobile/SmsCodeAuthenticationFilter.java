@@ -5,12 +5,14 @@ package com.lucky.core.security.mobile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
 
 /**
  *  手机短信认证的过滤器，拦截认证请求，组装token完成认证流程
@@ -22,6 +24,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
 	// ~ Static fields/initializers
 	// =====================================================================================
 
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	/**
 	 *  手机号参数名称
 	 */
@@ -50,6 +53,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
 		if (!request.getMethod().equalsIgnoreCase(httpMethod)) {
+			logger.debug("手机号+短信验证码登录的请求方式是:{},与配置的请求方式不一致：{}",request.getMethod(),httpMethod);
 			throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
 		}
 		String mobile = obtainMobile(request);
@@ -67,6 +71,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
 	 * 从请求中获取获取手机号
 	 */
 	protected String obtainMobile(HttpServletRequest request) {
+		logger.debug("手机号的参数名称是:{}",this.mobileParameterName);
 		return request.getParameter(mobileParameterName);
 	}
 

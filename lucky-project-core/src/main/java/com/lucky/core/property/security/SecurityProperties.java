@@ -23,6 +23,8 @@ public class SecurityProperties {
      */
     private AuthenticationProperties authentication = new AuthenticationProperties();
 
+
+
     public AuthenticationProperties getAuthentication() {
         return authentication;
     }

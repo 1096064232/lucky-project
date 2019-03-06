@@ -22,7 +22,7 @@ public class FormAuthenticationSecurityConfig extends WebSecurityConfigurerAdapt
     protected AuthenticationFailureHandler authenticationFailureHandler;
 
 
-    protected void applyPasswordAuthenticationConfig(HttpSecurity http) throws Exception {
+    protected HttpSecurity applyPasswordAuthenticationConfig(HttpSecurity http) throws Exception {
         http
                 .formLogin()
                 .loginPage(luckyProperties.getSecurity().getAuthentication().getUnAuthenticationUrl())
@@ -31,6 +31,8 @@ public class FormAuthenticationSecurityConfig extends WebSecurityConfigurerAdapt
                 .passwordParameter(luckyProperties.getSecurity().getParameter().getFormLogin().getPasswordParameterName())
                 .successHandler(authenticationSuccessHandler)
                 .failureHandler(authenticationFailureHandler);
+
+        return http;
     }
 
 }
