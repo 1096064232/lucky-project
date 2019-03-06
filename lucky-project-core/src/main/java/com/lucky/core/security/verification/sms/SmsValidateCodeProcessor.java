@@ -8,7 +8,6 @@ import com.lucky.core.exception.ValidateCodeException;
 import com.lucky.core.property.LuckyProperties;
 import com.lucky.core.security.verification.ValidateCode;
 import com.lucky.core.security.verification.impl.AbstractValidateCodeProcessor;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;

@@ -7,13 +7,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.lucky.common.util.CommonUtils;
 import com.lucky.core.exception.ValidateCodeException;
 import com.lucky.core.property.LuckyProperties;
 import com.lucky.core.security.verification.ValidateCodeProcessorHolder;

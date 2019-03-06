@@ -5,7 +5,6 @@ import com.lucky.core.exception.ValidateCodeException;
 import com.lucky.core.security.verification.sms.impl.AliSmsValidateCodeSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 /**
  * @Author ouyangfan
