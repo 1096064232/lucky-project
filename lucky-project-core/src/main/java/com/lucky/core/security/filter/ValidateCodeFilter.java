@@ -101,6 +101,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
+//        logger.debug("当前拦截的请求是:{},请求中携带的参数是：{}",request.getRequestURI(), CommonUtils.toString(request.getParameterMap()));
         ValidateCodeTypeEnum type = getValidateCodeType(request);
         if (type != null) {
             logger.debug("校验请求(" + request.getRequestURI() + ")中的验证码,验证码类型" + type);
@@ -124,11 +125,10 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
      * @return
      */
     private ValidateCodeTypeEnum getValidateCodeType(HttpServletRequest request) {
-        String targetUrl = request.getRequestURI();
-        logger.debug("当前拦截的请求是:{}",targetUrl);
+
         Set<String> urls = urlMap.keySet();
         for (String url : urls) {
-            if (pathMatcher.match(url, targetUrl)) {
+            if (pathMatcher.match(url, request.getRequestURI())) {
                return urlMap.get(url);
             }
         }
