@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lucky.browser.security.authentication.SocialUserInfo;
 import com.lucky.common.pojo.SimpleResponse;
 import com.lucky.core.property.LuckyProperties;
 import com.lucky.core.property.constant.SecurityConstants;
@@ -18,9 +19,13 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.web.ProviderSignInUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.ServletWebRequest;
 
 
 /**
@@ -40,6 +45,9 @@ public class BrowserSecurityController {
 
     @Autowired
     private LuckyProperties luckyProperties;
+
+    @Autowired
+    ProviderSignInUtils providerSignInUtils;
 
     /**
      * 当需要身份认证时，跳转到这里
@@ -63,6 +71,23 @@ public class BrowserSecurityController {
             }
         }
         return new SimpleResponse("访问的服务需要身份认证，请引导用户到登录页");
+    }
+
+
+    /**
+     *  获取社交登录到用户信息
+     * @param request
+     * @return
+     */
+    @GetMapping(SecurityConstants.SOCIAL_USER_URL)
+    public SocialUserInfo getSocialUserInfo(HttpServletRequest request){
+        SocialUserInfo socialUserInfo = new SocialUserInfo();
+        Connection connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
+        socialUserInfo.setProviderId(connection.getKey().getProviderId());
+        socialUserInfo.setProviderUserId(connection.getKey().getProviderUserId());
+        socialUserInfo.setHeadImage(connection.getImageUrl());
+        socialUserInfo.setNickName(connection.getDisplayName());
+        return  socialUserInfo;
     }
 
 }

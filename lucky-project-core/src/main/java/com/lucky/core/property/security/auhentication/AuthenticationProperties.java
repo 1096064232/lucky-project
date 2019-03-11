@@ -27,6 +27,19 @@ public class AuthenticationProperties {
      */
     private BrowserAuthenticationProperties browser = new BrowserAuthenticationProperties();
 
+    /**
+     *  社交登录配置项
+     */
+    private SocialAuthenticationProperties social = new SocialAuthenticationProperties();
+
+    public SocialAuthenticationProperties getSocial() {
+        return social;
+    }
+
+    public void setSocial(SocialAuthenticationProperties social) {
+        this.social = social;
+    }
+
     public BrowserAuthenticationProperties getBrowser() {
         return browser;
     }

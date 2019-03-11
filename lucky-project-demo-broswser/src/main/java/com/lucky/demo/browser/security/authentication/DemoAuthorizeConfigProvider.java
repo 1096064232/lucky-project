@@ -10,9 +10,10 @@ public class DemoAuthorizeConfigProvider implements AuthorizeConfigProvider {
     @Override
     public HttpSecurity config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config)throws Exception {
         return config
+                        .antMatchers("/user/regist").permitAll()
                         .antMatchers("/user/*").hasAnyRole("ROLE_USER")
                         .and()
                         .csrf()
-                .disable();
+                        .disable();
     }
 }

@@ -100,15 +100,14 @@ public class LuckyUser implements LuckyUserDetails {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(super.toString()).append(": ");
-        sb.append("Username: ").append(this.username).append("; ");
-        sb.append("mobileNumber: ").append(this.mobileNumber).append("; ");
+        sb.append("Username: ").append(this.username).append(";");
+        sb.append("mobileNumber: ").append(this.mobileNumber).append(";");
         sb.append("userId: ").append(this.userId).append("; ");
-        sb.append("Password: [PROTECTED]; ");
-        sb.append("Enabled: ").append(this.enabled).append("; ");
-        sb.append("AccountNonExpired: ").append(this.accountNonExpired).append("; ");
-        sb.append("credentialsNonExpired: ").append(this.credentialsNonExpired).append("; ");
-        sb.append("AccountNonLocked: ").append(this.accountNonLocked).append("; ");
+        sb.append("Password: [PROTECTED];");
+        sb.append("Enabled: ").append(this.enabled).append(";");
+        sb.append("AccountNonExpired: ").append(this.accountNonExpired).append(";");
+        sb.append("credentialsNonExpired: ").append(this.credentialsNonExpired).append(";");
+        sb.append("AccountNonLocked: ").append(this.accountNonLocked).append(";");
         if (!this.authorities.isEmpty()) {
             sb.append("Granted Authorities: ");
             boolean first = true;
@@ -126,7 +125,6 @@ public class LuckyUser implements LuckyUserDetails {
         } else {
             sb.append("Not granted any authorities");
         }
-
         return sb.toString();
     }
 

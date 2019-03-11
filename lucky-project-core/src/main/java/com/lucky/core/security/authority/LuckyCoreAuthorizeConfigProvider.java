@@ -1,6 +1,7 @@
 package com.lucky.core.security.authority;
 
 import com.lucky.core.property.LuckyProperties;
+import com.lucky.core.property.constant.SecurityConstants;
 import com.lucky.core.property.constant.ValidateCodeConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,9 +18,12 @@ public class LuckyCoreAuthorizeConfigProvider implements AuthorizeConfigProvider
     public HttpSecurity config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
      return    config.antMatchers(
                 ValidateCodeConstant.CODE_URL+"/*",
+                SecurityConstants.PRINCIPAL_URL,
                 luckyProperties.getSecurity().getAuthentication().getUnAuthenticationUrl(),
                 luckyProperties.getSecurity().getAuthentication().getMobileLogin().getLoginProcessingUrl(),
-                luckyProperties.getSecurity().getAuthentication().getFormLogin().getLoginProcessingUrl()
+                luckyProperties.getSecurity().getAuthentication().getFormLogin().getLoginProcessingUrl(),
+                luckyProperties.getSecurity().getAuthentication().getSocial().getFilterProcessesUrl()+"/*",
+                luckyProperties.getSecurity().getAuthentication().getSocial().getSignupUrl()
         ).permitAll().and();
     }
 }

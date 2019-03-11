@@ -78,8 +78,21 @@
            
 
         
+                     UserConnectionRepository                     ServiceProvider   
+                                                                AbstractAuth2ServiceProvider
+                  (JdbcUsersConnectionRespository)
         
-             
+                        Connection
+                     (OAuth2Connection)                           OAuth2Operations
+                                                                    OAuth2Tempalte    
+                                                             
+                      ConnectionFactory
+                   (Oauth2ConnectionFactory)
+                   
+                       ServciceProvider                               Api
+                                                                  AbstractOAuth2ApiBinging
+                        ApiAdpeter
+                      
              
                          
        
