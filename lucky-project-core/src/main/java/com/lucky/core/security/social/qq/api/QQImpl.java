@@ -6,11 +6,16 @@ package com.lucky.core.security.social.qq.api;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucky.core.exception.SocialException;
+
+import java.nio.charset.Charset;
+import java.util.List;
 
 /**
  *  调用所有OpenAPI时，除了各接口私有的参数外，所有OpenAPI都需要传入基于OAuth2.0协议的通用参数：
@@ -54,22 +59,28 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 		this.appId = appId;
 		String url = String.format(URL_GET_OPENID, accessToken);
 		String result = getRestTemplate().getForObject(url, String.class);
-		logger.debug("access_token换取openid的结果是:{}",result);
 		this.openId = StringUtils.substringBetween(result, "\"openid\":\"", "\"}");
 	}
 
+	/**
+	 *  获取用户信息
+	 * @return
+	 */
 	@Override
 	public QQUserInfo getUserInfo() {
 
 		String url = String.format(URL_GET_USERINFO, appId, openId);
 		String result = getRestTemplate().getForObject(url, String.class);
-		logger.debug("openid换取QQUserInfo的结果是:{}",result );
-		QQUserInfo userInfo = null;
 		try {
-			userInfo = objectMapper.readValue(result, QQUserInfo.class);
+			QQUserInfo userInfo = objectMapper.readValue(result, QQUserInfo.class);
+			if(StringUtils.isNotBlank(userInfo.getMsg())){
+				logger.error("openid换取QQUserInfo返回错误的JSON数据包:{}",result );
+				throw new SocialException("获取用户信息失败:"+userInfo.getMsg());
+			}
 			userInfo.setOpenId(openId);
 			return userInfo;
 		} catch (Exception e) {
+			logger.error("openid换取QQUserInfo失败:{}",e.getMessage() );
 			throw new SocialException("获取用户信息失败", e);
 		}
 	}

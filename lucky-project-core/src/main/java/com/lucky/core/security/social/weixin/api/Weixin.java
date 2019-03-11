@@ -5,14 +5,13 @@ package com.lucky.core.security.social.weixin.api;
 
 /**
  * 微信API调用接口
- * 
- * @author zhailiang
- *
  */
 public interface Weixin {
 
-	/* (non-Javadoc)
-	 * @see com.ymt.pz365.framework.security.social.api.SocialUserProfileService#getUserProfile(java.lang.String)
+	/**
+	 *  拉取用户信息
+	 * @param openId
+	 * @return
 	 */
 	WeixinUserInfo getUserInfo(String openId);
 	

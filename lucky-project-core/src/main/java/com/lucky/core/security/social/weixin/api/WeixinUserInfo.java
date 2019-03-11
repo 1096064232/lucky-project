@@ -5,8 +5,6 @@ package com.lucky.core.security.social.weixin.api;
 
 /**
  * 微信用户信息
- * 
- * @author zhailiang
  */
 public class WeixinUserInfo {
 	

@@ -5,8 +5,7 @@ package com.lucky.core.security.social.weixin.api;
 
 import java.nio.charset.Charset;
 import java.util.List;
-
-import com.lucky.common.util.CommonUtils;
+import com.lucky.core.exception.SocialException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,16 +18,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Weixin API调用模板， scope为Request的Spring bean, 根据当前用户的accessToken创建。
- * 
- * @author zhailiang
- *
  */
 public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
-	 * 
+	 *
 	 */
 	private ObjectMapper objectMapper = new ObjectMapper();
 	/**
@@ -61,16 +57,16 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
 		String url = URL_GET_USER_INFO + openId;
 		String response = getRestTemplate().getForObject(url, String.class);
 		if(StringUtils.contains(response, "errcode")) {
-			return null;
+			logger.error("openid换取WeixinUserInfo返回错误的JSON数据包：{}", response);
+			throw new SocialException("获取用户信息失败:"+response);
 		}
-		WeixinUserInfo profile = null;
 		try {
-			profile = objectMapper.readValue(response, WeixinUserInfo.class);
-			logger.debug("微信登录到额用户信息是:{}", CommonUtils.toString(profile));
+			return objectMapper.readValue(response, WeixinUserInfo.class);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("openid换取WeixinUserInfo的JSON数据包：{}转化为WeixinUserInfo对象出现错误：{}", response,e.getMessage());
+			throw new SocialException("获取用户信息失败",e);
 		}
-		return profile;
+
 	}
 
 }
