@@ -3,6 +3,8 @@
  */
 package com.lucky.core.property.security.verification;
 
+import java.util.Map;
+
 /**
  * 短信验证码的配置项
  */
@@ -21,7 +23,15 @@ public class SmsCodeProperties {
 	/**
 	 *  需要校验校验码的url，以，分割
 	 */
-	private String validateUrl;
+	private  Map<String,String> validateUrl;
+
+	public Map<String, String> getValidateUrl() {
+		return validateUrl;
+	}
+
+	public void setValidateUrl(Map<String, String> validateUrl) {
+		this.validateUrl = validateUrl;
+	}
 
 	private AliSmsCodeProperties aliSmsCode = new AliSmsCodeProperties();
 
@@ -31,14 +41,6 @@ public class SmsCodeProperties {
 
 	public void setAliSmsCode(AliSmsCodeProperties aliSmsCode) {
 		this.aliSmsCode = aliSmsCode;
-	}
-
-	public String getValidateUrl() {
-		return validateUrl;
-	}
-
-	public void setValidateUrl(String validateUrl) {
-		this.validateUrl = validateUrl;
 	}
 
 	public int getLength() {

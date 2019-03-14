@@ -16,6 +16,12 @@ public class SocialAuthenticationProperties {
      *  社交登录用户注册与绑定的页面url
      */
     private String signupUrl;
+
+    /**
+     *  用社交账号的openid登录的url(app)
+     */
+    private String openIdAuthenticaitonUrl="/openid/authentication";
+
     /**
      *  QQ登录配置项
      */
@@ -25,6 +31,14 @@ public class SocialAuthenticationProperties {
      *  微信登录配置项
      */
     private WeixinAuthenticationProperties weixin = new WeixinAuthenticationProperties();
+
+    public String getOpenIdAuthenticaitonUrl() {
+        return openIdAuthenticaitonUrl;
+    }
+
+    public void setOpenIdAuthenticaitonUrl(String openIdAuthenticaitonUrl) {
+        this.openIdAuthenticaitonUrl = openIdAuthenticaitonUrl;
+    }
 
     public String getSignupUrl() {
         return signupUrl;

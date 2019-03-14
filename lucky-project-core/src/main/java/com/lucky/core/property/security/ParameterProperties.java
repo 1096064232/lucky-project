@@ -2,6 +2,7 @@ package com.lucky.core.property.security;
 
 import com.lucky.core.property.security.auhentication.FormLoginParameterProperties;
 import com.lucky.core.property.security.auhentication.MobileLoginParameterProperties;
+import com.lucky.core.property.security.auhentication.OpenIdLoginParameterProperties;
 import com.lucky.core.property.security.verification.ValidateCodeParameterProperties;
 import sun.dc.pr.PRError;
 
@@ -26,6 +27,19 @@ public class ParameterProperties {
      *  用户名+密码登录参数名称配置项
      */
     private FormLoginParameterProperties formLogin = new FormLoginParameterProperties();
+
+    /**
+     * 用社交账号的openid登录的的参数配置
+     */
+    private OpenIdLoginParameterProperties openIdLogin = new OpenIdLoginParameterProperties();
+
+    public OpenIdLoginParameterProperties getOpenIdLogin() {
+        return openIdLogin;
+    }
+
+    public void setOpenIdLogin(OpenIdLoginParameterProperties openIdLogin) {
+        this.openIdLogin = openIdLogin;
+    }
 
     public FormLoginParameterProperties getFormLogin() {
         return formLogin;

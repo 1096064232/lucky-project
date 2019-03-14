@@ -32,6 +32,7 @@ public class ChannelSecurityConfig extends FormAuthenticationSecurityConfig {
 
         //收集系统中所有的认证配置
         for (String key : securityConfigurerProviderMap.keySet()) {
+
             passHttp.apply(securityConfigurerProviderMap.get(key));
         }
 

@@ -27,7 +27,6 @@ public class BrowserAuthenticationProperties {
      */
     private int maximumSessions = -1;
 
-
     /**
      *  达到最大session数后是禁止后来Session 登录
      */

@@ -58,9 +58,6 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 		return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
 	}
 
-	public LuckyUserDetailsService getLuckyUserDetailsService() {
-		return luckyUserDetailsService;
-	}
 
 	public void setLuckyUserDetailsService(LuckyUserDetailsService luckyUserDetailsService) {
 		this.luckyUserDetailsService = luckyUserDetailsService;

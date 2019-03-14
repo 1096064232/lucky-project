@@ -16,6 +16,7 @@
             <artifactId>lucky-project-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 
 </project>

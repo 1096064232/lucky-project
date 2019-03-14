@@ -1,7 +1,5 @@
 package com.lucky.core.property.security.auhentication;
 
-import com.lucky.core.security.verification.ValidateCodeTypeEnum;
-
 public class FormLoginParameterProperties {
 
     /**
@@ -30,5 +28,4 @@ public class FormLoginParameterProperties {
     public void setPasswordParameterName(String passwordParameterName) {
         this.passwordParameterName = passwordParameterName;
     }
-
 }
